@@ -1,5 +1,10 @@
 module Lib
-  ( promptReady
+  ( Sign
+      ( Rock
+      , Paper
+      , Scissors
+      )
+  , promptReady
   , countdown
   , promptSign
   ) where
@@ -11,14 +16,16 @@ data Sign =
   | Paper
   | Scissors
   deriving
-    ( Eq 
-    , Enum
-    , Bounded )
--- instance Show Suit where
---   show Hearts   = "H"
---   show Diamonds = "D"
---   show Clubs    = "C"
---   show Spades   = "S"
+    ( Show
+    , Eq
+    )
+instance Ord Sign where
+  compare Rock Paper     = LT
+  compare Rock Scissors  = GT
+  compare Paper Scissors = LT
+  compare Paper Rock     = GT
+  compare Scissors Rock  = LT
+  compare Scissors Paper = GT
 
 promptReady :: IO ()
 promptReady = do
