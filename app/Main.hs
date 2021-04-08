@@ -3,4 +3,7 @@ module Main where
 import Lib
 
 main :: IO ()
-main = countdown
+main = do
+  promptReady
+  _ <- getChar
+  countdown
