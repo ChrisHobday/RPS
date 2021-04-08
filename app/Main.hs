@@ -14,5 +14,5 @@ main = do
   _ <- getChar
   countdown
   promptSign
-  sign <- getChar
-  putChar sign
+  charSign <- getChar
+  print $ charToSign charSign

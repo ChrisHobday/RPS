@@ -7,6 +7,7 @@ module Lib
   , promptReady
   , countdown
   , promptSign
+  , charToSign
   ) where
 
 import Control.Concurrent
@@ -50,3 +51,12 @@ promptSign = do
 
 -- getSign :: IO Sign
 -- getSign = sign <- getChar
+
+charToSign :: Char -> Sign
+charToSign char
+  | char == 'r' = Rock
+  | char == 'R' = Rock
+  | char == 'p' = Paper
+  | char == 'P' = Paper
+  | char == 's' = Scissors
+  | char == 'S' = Scissors
