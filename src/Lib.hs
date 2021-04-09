@@ -2,15 +2,18 @@ module Lib
   ( Sign
       ( Rock
       , Paper
-      , Scissors
-      )
+      , Scissors )
   , promptReady
   , countdown
   , promptSign
   , charToSign
-  ) where
+  , aiChooseSign
+  , showChoices ) where
 
 import Control.Concurrent
+  ( threadDelay )
+import System.Random
+  ( randomRIO )
 
 data Sign = 
     Rock
@@ -19,7 +22,8 @@ data Sign =
   deriving
     ( Show
     , Eq
-    )
+    , Bounded
+    , Enum )
 instance Ord Sign where
   compare Rock Paper     = LT
   compare Rock Scissors  = GT
@@ -60,4 +64,14 @@ charToSign char
   | char == 'P' = Right Paper
   | char == 's' = Right Scissors
   | char == 'S' = Right Scissors
-  | otherwise   = Left "You entered an invalid sign, please choose R, p or S next time."
+  | otherwise   = Left "You entered an invalid sign, please choose R, P or S next time."
+
+aiChooseSign :: IO Sign
+aiChooseSign = do
+  n <- randomRIO (0,2)
+  return $ toEnum n
+
+showChoices :: Sign -> Sign -> IO ()
+showChoices s s' = putStrLn $ "You chose " ++ show s ++ " and your opponent chose " ++ show s'
+
+
