@@ -8,7 +8,8 @@ module Lib
   , promptSign
   , charToSign
   , aiChooseSign
-  , showChoices ) where
+  , showChoices
+  , evaluateChoices ) where
 
 import Control.Concurrent
   ( threadDelay )
@@ -36,9 +37,6 @@ promptReady :: IO ()
 promptReady = do
   putStrLn "Ready? (Enter)"
 
--- getReady :: IO String
--- getReady = _ <- getChar
-
 countdown :: IO ()
 countdown = do
   putStrLn "3"
@@ -52,9 +50,6 @@ countdown = do
 promptSign :: IO ()
 promptSign = do
   putStrLn "(R)ock (P)aper (S)cissors"
-
--- getSign :: IO Sign
--- getSign = sign <- getChar
 
 charToSign :: Char -> Either String Sign
 charToSign char
@@ -74,4 +69,8 @@ aiChooseSign = do
 showChoices :: Sign -> Sign -> IO ()
 showChoices s s' = putStrLn $ "You chose " ++ show s ++ " and your opponent chose " ++ show s'
 
-
+evaluateChoices :: Sign -> Sign -> IO ()
+evaluateChoices s s'
+  | s > s'  = putStrLn $ show s ++ " beats " ++ show s' ++ " you win!"
+  | s < s'  = putStrLn $ show s' ++ " beats " ++ show s ++ " you lose!"
+  | s == s' = putStrLn "It's a tie!"
