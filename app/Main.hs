@@ -4,8 +4,6 @@ import System.IO
   ( hSetBuffering
   , stdin
   , BufferMode (NoBuffering) )
-import Data.Either
-  ( isLeft )
 
 import Lib
 
@@ -17,12 +15,11 @@ main = do
   countdown
   promptSign
   charSign <- getChar
+  putStrLn "" -- Put empty line after charChar
   aiSign <- aiChooseSign
-  let playerSign = charToSign charSign
-  if isLeft playerSign -- Check if player entered invalid sign (using Either)
-    then do
-      print playerSign
-  else
-    do
-      print playerSign
-      -- showChoices $ (charToSign charSign) aiSign
+  let eitherPlayerSign = charToSign charSign
+  case eitherPlayerSign of
+    Left errorMessage ->
+      putStrLn errorMessage
+    Right playerSign ->
+      showChoices playerSign aiSign
