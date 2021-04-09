@@ -52,11 +52,12 @@ promptSign = do
 -- getSign :: IO Sign
 -- getSign = sign <- getChar
 
-charToSign :: Char -> Sign
+charToSign :: Char -> Either String Sign
 charToSign char
-  | char == 'r' = Rock
-  | char == 'R' = Rock
-  | char == 'p' = Paper
-  | char == 'P' = Paper
-  | char == 's' = Scissors
-  | char == 'S' = Scissors
+  | char == 'r' = Right Rock
+  | char == 'R' = Right Rock
+  | char == 'p' = Right Paper
+  | char == 'P' = Right Paper
+  | char == 's' = Right Scissors
+  | char == 'S' = Right Scissors
+  | otherwise   = Left "You entered an invalid sign, please choose R, p or S next time."
