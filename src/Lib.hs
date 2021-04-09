@@ -59,7 +59,7 @@ charToSign char
   | char == 'P' = Right Paper
   | char == 's' = Right Scissors
   | char == 'S' = Right Scissors
-  | otherwise   = Left "You entered an invalid sign, please choose R, P or S next time."
+  | otherwise   = Left "You entered an invalid sign, please choose (R)ock, (P)aper or (S)cissors next time."
 
 aiChooseSign :: IO Sign
 aiChooseSign = do
@@ -71,6 +71,6 @@ showChoices s s' = putStrLn $ "You chose " ++ show s ++ " and your opponent chos
 
 evaluateChoices :: Sign -> Sign -> IO ()
 evaluateChoices s s'
+  | s == s' = putStrLn "It's a tie!"
   | s > s'  = putStrLn $ show s ++ " beats " ++ show s' ++ " you win!"
   | s < s'  = putStrLn $ show s' ++ " beats " ++ show s ++ " you lose!"
-  | s == s' = putStrLn "It's a tie!"
