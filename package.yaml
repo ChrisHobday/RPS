@@ -1,10 +1,10 @@
 name:                RPS
 version:             0.1.0.0
-github:              "githubuser/RPS"
+github:              "ChrisHobday/RPS"
 license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2021 Author name here"
+author:              "Chris Hobday"
+maintainer:          "hobday.chris@protonmail.com"
+copyright:           "2021 Chris Hobday"
 
 extra-source-files:
 - README.md
