@@ -4,16 +4,16 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 8e87f02e80eb6920d8c35a770d4fa83349f8ae1b92b3a6c30358ab8199561855
+-- hash: e88952e088c2445e606ef918e38ed85ecbc0013e235166487b0b6ef57a55ec08
 
 name:           RPS
 version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/githubuser/RPS#readme>
-homepage:       https://github.com/githubuser/RPS#readme
-bug-reports:    https://github.com/githubuser/RPS/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2021 Author name here
+homepage:       https://github.com/ChrisHobday/RPS#readme
+bug-reports:    https://github.com/ChrisHobday/RPS/issues
+author:         Chris Hobday
+maintainer:     hobday.chris@protonmail.com
+copyright:      2021 Chris Hobday
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
@@ -23,7 +23,7 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/RPS
+  location: https://github.com/ChrisHobday/RPS
 
 library
   exposed-modules:
