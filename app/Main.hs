@@ -4,7 +4,6 @@ import System.IO
   ( hSetBuffering
   , stdin
   , BufferMode (NoBuffering) )
-
 import Lib
   ( promptReady
   , countdown

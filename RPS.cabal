@@ -4,11 +4,11 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e88952e088c2445e606ef918e38ed85ecbc0013e235166487b0b6ef57a55ec08
+-- hash: 4f16c48ff7a204e2837a0837ac2ac4c010dd2be4d8b581cc7a2d4a4f773d2a1e
 
 name:           RPS
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/RPS#readme>
+description:    Please see the README on GitHub at <https://github.com/ChrisHobday/RPS#readme>
 homepage:       https://github.com/ChrisHobday/RPS#readme
 bug-reports:    https://github.com/ChrisHobday/RPS/issues
 author:         Chris Hobday
@@ -28,6 +28,7 @@ source-repository head
 library
   exposed-modules:
       Lib
+      Testing.Time
   other-modules:
       Paths_RPS
   hs-source-dirs:
