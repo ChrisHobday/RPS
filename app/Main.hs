@@ -4,6 +4,7 @@ import System.IO
   ( hSetBuffering
   , stdin
   , BufferMode (NoBuffering) )
+import Control.Concurrent
 import Lib
   ( promptReady
   , countdown
@@ -22,6 +23,7 @@ main = do
   promptSign -- Prompt the player for a sign
   charSign <- getChar -- Get player sign as a char
   putStrLn "" -- Put empty line after charChar
+  mVar <- newEmptyMVar -- Create new empty mVar
   aiSign <- aiChooseSign -- Generate random sign for ai
   let eitherPlayerSign = charToSign charSign
   case eitherPlayerSign of -- Check eitherPlayerSign for either error (player entered invalid sign) or sign value

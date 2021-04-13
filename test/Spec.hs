@@ -1,4 +1,5 @@
 import Lib
+import Testing.Time
 
 import Control.Concurrent
 
