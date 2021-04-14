@@ -74,7 +74,7 @@ aiChooseSign = do
 
 -- Shows the player and ai sign choices (assumed player sign is first)
 showChoices :: Sign -> Sign -> IO ()
-showChoices s s' = putStrLn $ "You chose " ++ show s ++ " and your opponent chose " ++ show s'
+showChoices s s' = putStrLn $ "You chose " ++ show s ++ " and your opponent chose " ++ show s' ++ "."
 
 -- Evaluates and shows the results of player and ai sign choices (assumed player sign is first)
 evaluateChoices :: Sign -> Sign -> IO ()
