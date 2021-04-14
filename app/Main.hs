@@ -28,7 +28,7 @@ main = do
   charSign <- getChar -- Get player sign as a char
   putStrLn "" -- Put empty line after charChar
   m <- newEmptyMVar -- Create empty mVar m
-  forkIO $ aiChooseSign >>= putMVar m -- Generate random sign for ai concurrently and place it in mVar m
+  _ <- forkIO $ aiChooseSign >>= putMVar m -- Generate random sign for ai concurrently and place it in mVar m
   aiSign <- takeMVar m -- Take value from mVar m and bind it to test
   let eitherPlayerSign = charToSign charSign
   case eitherPlayerSign of -- Check eitherPlayerSign for either error (player entered invalid sign) or sign value
