@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 4f16c48ff7a204e2837a0837ac2ac4c010dd2be4d8b581cc7a2d4a4f773d2a1e
+-- hash: 21830d58b5b7c8e051c5a2ba97c7767cbc5a5113655cd7e26e5ac58f91dfde7a
 
 name:           RPS
 version:        0.1.0.0
@@ -36,6 +36,7 @@ library
   build-depends:
       base >=4.7 && <5
     , random
+    , stm
   default-language: Haskell2010
 
 executable RPS-exe
@@ -49,6 +50,7 @@ executable RPS-exe
       RPS
     , base >=4.7 && <5
     , random
+    , stm
   default-language: Haskell2010
 
 test-suite RPS-test
@@ -63,4 +65,5 @@ test-suite RPS-test
       RPS
     , base >=4.7 && <5
     , random
+    , stm
   default-language: Haskell2010
