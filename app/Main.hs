@@ -29,7 +29,7 @@ main = do
   putStrLn "" -- Put empty line after charChar
   m <- newEmptyMVar -- Create empty mVar m
   _ <- forkIO $ aiChooseSign >>= putMVar m -- Generate random sign for ai concurrently and place it in mVar m
-  aiSign <- takeMVar m -- Take value from mVar m and bind it to test
+  aiSign <- takeMVar m -- Take value from mVar m and bind it to aiSign
   let eitherPlayerSign = charToSign charSign
   case eitherPlayerSign of -- Check eitherPlayerSign for either error (player entered invalid sign) or sign value
     Left errorMessage -> -- If player entered invalid sign
