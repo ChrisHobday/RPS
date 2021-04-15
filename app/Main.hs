@@ -4,8 +4,18 @@ import System.IO
   ( hSetBuffering
   , stdin
   , BufferMode (NoBuffering) )
+import Control.Concurrent
+  ( forkIO )
+import Data.IORef
+  ( newIORef
+  , writeIORef
+  , readIORef )
 import Lib
-  ( promptReady
+  ( Sign
+      ( Rock
+      , Paper
+      , Scissors )
+  , promptReady
   , countdown
   , promptSign
   , aiChooseSign
@@ -22,7 +32,9 @@ main = do
   promptSign -- Prompt the player for a sign
   charSign <- getChar -- Get player sign as a char
   putStrLn "" -- Put empty line after charChar
-  aiSign <- aiChooseSign -- Generate random sign for ai
+  ioR <- newIORef Rock -- Create ioRef with default value Rock
+  _ <- forkIO $ aiChooseSign >>= writeIORef ioR -- Generate random sign for ai concurrently and place it in ioRef ioR
+  aiSign <- readIORef ioR -- Read value from ioRef ioR and bind it to aiSign
   let eitherPlayerSign = charToSign charSign
   case eitherPlayerSign of -- Check eitherPlayerSign for either error (player entered invalid sign) or sign value
     Left errorMessage -> -- If player entered invalid sign
