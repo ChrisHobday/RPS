@@ -5,10 +5,12 @@ import System.IO
   , stdin
   , BufferMode (NoBuffering) )
 import Control.Concurrent
-  ( newEmptyMVar
-  , forkIO
-  , putMVar
-  , takeMVar )
+  ( forkIO )
+import Control.Concurrent.STM
+  ( newEmptyTMVarIO
+  , atomically
+  , putTMVar
+  , takeTMVar )
 import Lib
   ( promptReady
   , countdown
@@ -27,9 +29,11 @@ main = do
   promptSign -- Prompt the player for a sign
   charSign <- getChar -- Get player sign as a char
   putStrLn "" -- Put empty line after charChar
-  m <- newEmptyMVar -- Create empty mVar m
-  _ <- forkIO $ aiChooseSign >>= putMVar m -- Generate random sign for ai concurrently and place it in mVar m
-  aiSign <- takeMVar m -- Take value from mVar m and bind it to aiSign
+  tM <- newEmptyTMVarIO -- Create empty tMVar tm
+  _ <- forkIO $ do -- Spawn new thread
+    aiSign <- aiChooseSign -- Generate random sign for ai
+    atomically $ putTMVar tM aiSign -- Write aiSign to tMVar tM
+  aiSign <- atomically $ takeTMVar tM -- Take value from tMVar tM and bind it to aiSign
   let eitherPlayerSign = charToSign charSign
   case eitherPlayerSign of -- Check eitherPlayerSign for either error (player entered invalid sign) or sign value
     Left errorMessage -> -- If player entered invalid sign
