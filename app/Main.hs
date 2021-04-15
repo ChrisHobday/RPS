@@ -35,7 +35,6 @@ main = do
   promptSign -- Prompt the player for a sign
   charSign <- getChar -- Get player sign as a char
   putStrLn "" -- Put empty line after charChar
-  aiSign <- aiChooseSign -- Generate random sign for ai
   t <- newTVarIO Rock -- Create tVar t with default value Rock
   _ <- forkIO $ do -- Spawn new thread
     aiSign <- aiChooseSign -- Generate random sign for ai
