@@ -4,6 +4,8 @@ import System.IO
   ( hSetBuffering
   , stdin
   , BufferMode (NoBuffering) )
+import Control.Concurrent
+  ( forkIO )
 import Control.Concurrent.STM
   ( newTVarIO
   , atomically
@@ -12,7 +14,11 @@ import Control.Concurrent.STM
 import Data.Maybe
   ( fromJust )
 import Lib
-  ( promptReady
+  ( Sign
+      ( Rock
+      , Paper
+      , Scissors )
+  , promptReady
   , countdown
   , promptSign
   , aiChooseSign
@@ -30,15 +36,11 @@ main = do
   charSign <- getChar -- Get player sign as a char
   putStrLn "" -- Put empty line after charChar
   aiSign <- aiChooseSign -- Generate random sign for ai
-
-  t <- newTVarIO Nothing -- Create tVar containing Nothing
-  atomically $ writeTVar t (Just "test") -- Generate random sign for ai concurrently and place it in mVar m
-  test <- readTVarIO t
-  print $ fromJust test
-  -- m <- newEmptyMVar -- Create empty mVar m
-  -- _ <- forkIO $ aiChooseSign >>= putMVar m -- Generate random sign for ai concurrently and place it in mVar m
-  -- aiSign <- takeMVar m -- Take value from mVar m and bind it to test
-
+  t <- newTVarIO Rock -- Create tVar t with default value Rock
+  _ <- forkIO $ do -- Spawn new thread
+    aiSign <- aiChooseSign -- Generate random sign for ai
+    atomically $ writeTVar t aiSign -- Write aiSign to tVar t
+  aiSign <- readTVarIO t -- Read value from tVar t and bind it to aiSign
   let eitherPlayerSign = charToSign charSign
   case eitherPlayerSign of -- Check eitherPlayerSign for either error (player entered invalid sign) or sign value
     Left errorMessage -> -- If player entered invalid sign
